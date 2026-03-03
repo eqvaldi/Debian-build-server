@@ -1,5 +1,5 @@
 # Debian-build-server-V3
-automated buid scripts for a Debian based distros for server env.
+automated build scripts for a Debian based distros for server env.
 
 # Usage
 
@@ -9,4 +9,4 @@ automated buid scripts for a Debian based distros for server env.
 
 3. Run: bash ./files.sh
 
-4. Then run: bash ./build.sh
+4. Then run: bash ./build.sh (As sudo)
