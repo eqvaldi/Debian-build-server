@@ -78,10 +78,10 @@ do
             ;;
         2)
 	#update
+	git pull
 	cd ./build
 	git pull
 	cd ..
             ;;
-
     esac
 done

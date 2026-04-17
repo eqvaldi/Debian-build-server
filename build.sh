@@ -5,7 +5,7 @@ echo
 echo                    Copyright © Eqvaldi-deer/Eqvaldi-records
 echo
 echo
-echo                                   2017-2025
+echo                                   2017-2026
 echo
 echo                               special thanks to:
 echo
@@ -17,27 +17,23 @@ echo ===========================================================================
 
 cmd=(dialog --keep-tite --menu "Debian-build-server-V3" 22 76 16)
 
-options=(1 "DELETE Build,img directory"
-         2 "Build x86 trixie current"
-         3 "Build x86 trixie EDGE"
-         4 "Build x86 Sid"
-         5 "Build ARM trixie current"
-         6 "Build ARM Sid"
-         7 "Build ALL Sid"
-	 8 "Build ALL trixie"
-	 9 "Custom Build")
-
+options=(1 "Build x86 trixie current"
+         2 "Build x86 trixie EDGE"
+         3 "Build x86 Sid"
+         4 "Build ARM trixie current"
+         5 "Build ARM Sid"
+         6 "Build ALL Sid"
+	 7 "Build ALL trixie"
+	 8 "Custom Build"
+	 9 "DELETE Build directory"
+	 10 "DELETE img directory")
+	 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
 for choice in $choices
 do
     case $choice in
         1)
-	#DELETE
-	rm -rf ./build
-	rm -rf ./img
-            ;;
-        2)
 	#86-trixie-current
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=img BSPFREEZE=yes
@@ -82,7 +78,7 @@ do
 	rm -rf ./build/userpatches/customize-image.sh
 
             ;;
-        3)
+        2)
 	#86-trixie-EDGE
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=img BSPFREEZE=yes
@@ -126,7 +122,7 @@ do
 	mv ./build/output/images ./img/labwc/EDGE/
 	rm -rf ./build/userpatches/customize-image.sh
             ;;
-        4)
+        3)
 	#86-sid
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=img BSPFREEZE=yes
@@ -170,7 +166,7 @@ do
 	mv ./build/output/images ./img/labwc/X86/
 	rm -rf ./build/userpatches/customize-image.sh
             ;;
-        5)
+        4)
 	#ARM-trixie
 	cd ./build
 	./compile.sh  BOARD=odroidn2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=img BSPFREEZE=yes
@@ -295,7 +291,7 @@ do
 	mv ./build/output/images ./img/labwc/ARM/
 	rm -rf ./build/userpatches/customize-image.sh
             ;;
-        6)
+        5)
 	#ARM-sid
 	cd ./build
 	./compile.sh  BOARD=odroidn2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=img BSPFREEZE=yes
@@ -420,15 +416,22 @@ do
 	mv ./build/output/images ./img/labwc/ARM/
 	rm -rf ./build/userpatches/customize-image.sh
             ;;
-        7)
+        6)
 	bash ./all-sid.sh
             ;;
-        8)
+        7)
 	bash ./all.sh
             ;;
-        9)
+        8)
 	bash ./custom.sh
             ;;
-
+        9)
+	#DELETE build dir.
+	rm -rf ./build
+            ;;
+        10)
+	#DELETE img dir.
+	rm -rf ./img
+            ;;
     esac
 done
