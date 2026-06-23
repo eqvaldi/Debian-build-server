@@ -69,3 +69,34 @@ find . -type f -name "*.img" -exec 7z a {}.7z {} \;
 cd ..
 cd ..
 cd ..
+#ubuntu
+cd ./ubuntuminimal/ARM/images
+find . -type f -name "*.img" -exec 7z a {}.7z {} \;
+cd ..
+cd ..
+cd ..
+cd ./ubuntuminimal/X86/images
+find . -type f -name "*.img" -exec 7z a {}.7z {} \;
+cd ..
+cd ..
+cd ..
+cd ./ubuntuxfce/ARM/images
+find . -type f -name "*.img" -exec 7z a {}.7z {} \;
+cd ..
+cd ..
+cd ..
+cd ./ubuntuxfce/X86/images
+find . -type f -name "*.img" -exec 7z a {}.7z {} \;
+cd ..
+cd ..
+cd ..
+cd ./ubuntucinnamon/ARM/images
+find . -type f -name "*.img" -exec 7z a {}.7z {} \;
+cd ..
+cd ..
+cd ..
+cd ./ubuntucinnamon/X86/images
+find . -type f -name "*.img" -exec 7z a {}.7z {} \;
+cd ..
+cd ..
+cd ..

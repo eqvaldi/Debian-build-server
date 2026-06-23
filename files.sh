@@ -5,7 +5,7 @@ echo
 echo                    Copyright © Eqvaldi-deer/Eqvaldi-records
 echo
 echo
-echo                                   2017-2025
+echo                                   2017-2026
 echo
 echo                               special thanks to:
 echo
@@ -68,6 +68,21 @@ do
 	mkdir labwc
 	cd labwc
 	mkdir EDGE
+	mkdir X86
+	mkdir ARM
+	cd ..
+	mkdir ubuntuminimal
+	cd ubuntuminimal
+	mkdir X86
+	mkdir ARM
+	cd ..
+	mkdir ubuntuxfce
+	cd ubuntuxfce
+	mkdir X86
+	mkdir ARM
+	cd ..
+	mkdir ubuntucinnamon
+	cd ubuntucinnamon
 	mkdir X86
 	mkdir ARM
 	cd ..
