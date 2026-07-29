@@ -88,8 +88,6 @@ do
 	cd ..
 	cd ..
 	git clone https://github.com/Eqvaldi-deer/build.git
-	cp ./buildscripts/compress.sh ./img
-	cp ./buildscripts/compresssid.sh ./img
             ;;
         2)
 	#update
