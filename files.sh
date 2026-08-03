@@ -15,7 +15,7 @@ echo                    Github: https://github.com/BeanGreen247
 echo
 echo ============================================================================
 
-cmd=(dialog --keep-tite --menu "Debian-build-server-V3" 22 76 16)
+cmd=(dialog --keep-tite --menu "Debian-build-server-V4" 22 76 16)
 
 options=(1 "Create Files"
          2 "Update")

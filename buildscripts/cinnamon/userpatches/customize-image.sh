@@ -55,27 +55,52 @@ Main() {
 		trixie)
 			apt update -y
 			apt install cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils spek bison flex libsndfile1-dev quakespasm glmark2* -y
+			ConfigureDesktop
 			apt clean
-			;;	
+			;;
    		sid)
 			apt update -y
 			apt install cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
+			ConfigureDesktop
 			apt clean
-			;;	
+			;;
 		bionic)
 			# your code here
 			;;
 		focal)
-			
+
 			;;
 		resolute)
 			apt update -y
 			apt install snapd cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			snap install chromium-browser -y
+			ConfigureDesktop
 			apt clean
 			;;
 	esac
 } # Main
+
+ConfigureDesktop() {
+	mkdir -p /etc/dconf/profile /etc/dconf/db/local.d
+	echo -e "user-db:user\nsystem-db:local" > /etc/dconf/profile/user
+	cat > /etc/dconf/db/local.d/00-eqlinux-theme <<-EOF
+	[org/cinnamon/desktop/interface]
+	gtk-theme='Orchis'
+	icon-theme='Numix'
+
+	[org/cinnamon/theme]
+	name='Orchis'
+	EOF
+	if [ -f /tmp/overlay/wallpaper.jpg ]; then
+		cp /tmp/overlay/wallpaper.jpg /usr/share/backgrounds/eqlinux-wallpaper.jpg
+		cat > /etc/dconf/db/local.d/01-eqlinux-wallpaper <<-EOF
+		[org/cinnamon/desktop/background]
+		picture-uri='file:///usr/share/backgrounds/eqlinux-wallpaper.jpg'
+		picture-options='zoom'
+		EOF
+	fi
+	dconf update
+} # ConfigureDesktop
 
 InstallOpenMediaVault() {
 	# use this routine to create a Debian based fully functional OpenMediaVault

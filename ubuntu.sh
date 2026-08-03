@@ -1,65 +1,20 @@
 #!/bin/sh
-#minimal
-cd ./build
-./compile.sh  BOARD=odroidn2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=odroidxu4 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepi3 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepione ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepioneplus ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepiprime ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepizero ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=tinkerboard ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=odroidc2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepipc2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepipc ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes 
-./compile.sh  BOARD=orangepiplus ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepiwin ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepizeroplus2-h5 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=jetson-nano ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-cd ..
-mv ./build/output/images ./img/ubuntuminimal/ARM/
-cd ./build
-./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-cd ..
-mv ./build/output/images ./img/ubuntuminimal/X86/
-#Xfce
-cp ./buildscripts/xfce/userpatches/customize-image.sh ./build/userpatches/
-cd ./build
-./compile.sh  BOARD=odroidn2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=odroidxu4 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepi3 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepioneplus ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepiprime ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=tinkerboard ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=odroidc2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepipc2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepipc ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes 
-./compile.sh  BOARD=orangepiplus ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepiwin ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-cd ..
-mv ./build/output/images ./img/ubuntuxfce/ARM/
-rm -rf ./build/userpatches/customize-image.sh
-cp ./buildscripts/xfce86/userpatches/customize-image.sh ./build/userpatches/
-cd ./build
-./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-cd ..
-mv ./build/output/images ./img/ubuntuxfce/X86/
-rm -rf ./build/userpatches/customize-image.sh
-#Cinnamon
-cp ./buildscripts/cinnamon/userpatches/customize-image.sh ./build/userpatches/
-cd ./build
-./compile.sh  BOARD=odroidn2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=odroidxu4 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=orangepi3 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=odroidc2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-cd ..
-mv ./build/output/images ./img/ubuntucinnamon/ARM/
-rm -rf ./build/userpatches/customize-image.sh
-cp ./buildscripts/cinnamon86/userpatches/customize-image.sh ./build/userpatches/
-cd ./build
-./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=resolute BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-cd ..
-mv ./build/output/images ./img/ubuntucinnamon/X86/
+if [ -f ./wallpapers/wallpaper.jpg ]; then
+	mkdir -p ./build/userpatches/overlay
+	cp ./wallpapers/wallpaper.jpg ./build/userpatches/overlay/wallpaper.jpg
+fi
+
+. ./vars.sh
+. ./lib-build.sh
+
+# Ubuntu resolute - ARM (original ubuntu.sh never set REPOSITORY_INSTALL for ARM boards here - kept as-is)
+build_group ""                                                    "EQLinux"          current resolute ubuntuminimal/ARM  "" $ARM_BOARDS_FULL
+build_group buildscripts/xfce/userpatches/customize-image.sh      "EQLinux.xfce"     current resolute ubuntuxfce/ARM     "" $ARM_BOARDS_11
+build_group buildscripts/cinnamon/userpatches/customize-image.sh  "EQLinux.cinnamon" current resolute ubuntucinnamon/ARM "" $ARM_BOARDS_CINNAMON
+
+# Ubuntu resolute - X86 (original ubuntu.sh does set REPOSITORY_INSTALL=$X86_REPO here)
+build_group ""                                                     "EQLinux"          current resolute ubuntuminimal/X86  "$X86_REPO" $X86_BOARDS_UBUNTU
+build_group buildscripts/xfce86/userpatches/customize-image.sh     "EQLinux.xfce"     current resolute ubuntuxfce/X86     "$X86_REPO" $X86_BOARDS_UBUNTU
+build_group buildscripts/cinnamon86/userpatches/customize-image.sh "EQLinux.cinnamon" current resolute ubuntucinnamon/X86 "$X86_REPO" $X86_BOARDS_UBUNTU
+
+rm -f ./build/userpatches/customize-image.sh

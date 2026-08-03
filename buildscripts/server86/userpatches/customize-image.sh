@@ -53,21 +53,53 @@ Main() {
 		trixie)
 			apt update -y
 			apt install xfce4 xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome libmtp-runtime light-locker hyfetch lightdm-gtk-greeter-settings xorg lightdm htop gnome-icon-theme usb-modeswitch genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev flac libjpeg-dev xfce4-screenshooter thunar-archive-plugin gufw libglx-mesa0 libgl1-mesa-dri chromium bash-completion alsa-utils apt-utils sudo firmware-sof-signed alsa-firmware-loaders cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils spek bison flex glmark2* -y
+			ConfigureDesktop
 			apt clean
-			;;		
+			;;
 		sid)
 			apt update -y
 			apt install xfce4 xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome libmtp-runtime light-locker hyfetch lightdm-gtk-greeter-settings xorg lightdm htop gnome-icon-theme usb-modeswitch genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev flac libjpeg-dev xfce4-screenshooter thunar-archive-plugin gufw libglx-mesa0 libgl1-mesa-dri chromium bash-completion alsa-utils apt-utils sudo firmware-sof-signed alsa-firmware-loaders cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils sox bison flex glmark2* -y
+			ConfigureDesktop
 			apt clean
-			;;	   
+			;;
 		bionic)
 			# your code here
 			;;
 		focal)
-			
+
 			;;
 	esac
 } # Main
+
+ConfigureDesktop() {
+	mkdir -p /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
+	cat > /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml <<-'EOF'
+	<?xml version="1.0" encoding="UTF-8"?>
+	<channel name="xsettings" version="1.0">
+	  <property name="Net" type="empty">
+	    <property name="ThemeName" type="string" value="Orchis"/>
+	    <property name="IconThemeName" type="string" value="Numix"/>
+	  </property>
+	</channel>
+	EOF
+	if [ -f /tmp/overlay/wallpaper.jpg ]; then
+		cp /tmp/overlay/wallpaper.jpg /usr/share/backgrounds/eqlinux-wallpaper.jpg
+		cat > /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml <<-'EOF'
+		<?xml version="1.0" encoding="UTF-8"?>
+		<channel name="xfce4-desktop" version="1.0">
+		  <property name="backdrop" type="empty">
+		    <property name="screen0" type="empty">
+		      <property name="monitor0" type="empty">
+		        <property name="workspace0" type="empty">
+		          <property name="last-image" type="string" value="/usr/share/backgrounds/eqlinux-wallpaper.jpg"/>
+		        </property>
+		      </property>
+		    </property>
+		  </property>
+		</channel>
+		EOF
+	fi
+} # ConfigureDesktop
 
 InstallOpenMediaVault() {
 	# use this routine to create a Debian based fully functional OpenMediaVault
