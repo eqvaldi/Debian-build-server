@@ -118,11 +118,6 @@ build_group() {
 require_docker
 check_free_space
 
-if [ -f ./wallpapers/wallpaper.jpg ]; then
-	mkdir -p ./build/userpatches/overlay
-	cp ./wallpapers/wallpaper.jpg ./build/userpatches/overlay/wallpaper.jpg
-fi
-
 # Debian trixie - ARM
 build_group ""                                              "EQLinux"            trixie minimal/ARM   "$ARM_REPO" $ARM_BOARDS_FULL
 build_group buildscripts/xfce/userpatches/customize-image.sh     "EQLinux.xfce"       trixie xfce/ARM      "$ARM_REPO" $ARM_BOARDS_FULL

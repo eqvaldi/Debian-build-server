@@ -71,11 +71,6 @@ ConfigureDesktop() {
 	EOF
 	gtk-update-icon-cache -f /usr/share/icons/Numix 2>/dev/null || true
 
-	if [ -f /tmp/overlay/wallpaper.jpg ]; then
-		mkdir -p /etc/xdg/labwc
-		cp /tmp/overlay/wallpaper.jpg /usr/share/backgrounds/eqlinux-wallpaper.jpg
-		echo "swaybg -i /usr/share/backgrounds/eqlinux-wallpaper.jpg -m fill &" >> /etc/xdg/labwc/autostart
-	fi
 } # ConfigureDesktop
 
 InstallOpenMediaVault() {

@@ -98,15 +98,6 @@ ConfigureDesktop() {
 	EOF
 	gtk-update-icon-cache -f /usr/share/icons/Numix 2>/dev/null || true
 
-	if [ -f /tmp/overlay/wallpaper.jpg ]; then
-		mkdir -p /etc/xdg/pcmanfm-qt/lxqt
-		cp /tmp/overlay/wallpaper.jpg /usr/share/backgrounds/eqlinux-wallpaper.jpg
-		cat > /etc/xdg/pcmanfm-qt/lxqt/settings.conf <<-EOF
-		[Desktop]
-		Wallpaper=/usr/share/backgrounds/eqlinux-wallpaper.jpg
-		WallpaperMode=zoom
-		EOF
-	fi
 } # ConfigureDesktop
 
 InstallOpenMediaVault() {

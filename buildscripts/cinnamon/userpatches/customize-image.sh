@@ -109,14 +109,6 @@ ConfigureDesktop() {
 	EOF
 	gtk-update-icon-cache -f /usr/share/icons/Numix 2>/dev/null || true
 
-	if [ -f /tmp/overlay/wallpaper.jpg ]; then
-		cp /tmp/overlay/wallpaper.jpg /usr/share/backgrounds/eqlinux-wallpaper.jpg
-		cat > /etc/dconf/db/local.d/01-eqlinux-wallpaper <<-EOF
-		[org/cinnamon/desktop/background]
-		picture-uri='file:///usr/share/backgrounds/eqlinux-wallpaper.jpg'
-		picture-options='zoom'
-		EOF
-	fi
 	dconf update
 } # ConfigureDesktop
 

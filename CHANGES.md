@@ -22,27 +22,6 @@ during image build with no display session and no D-Bus - settings have to be
 pre-seeded as files the desktop reads on first real login, not set via
 `gsettings`/`xfconf-query` (which need a running session).
 
-## Wallpaper
-
-Single wallpaper file applied across Cinnamon, MATE, LXQT, XFCE, and labwc.
-
-- **`wallpapers/`** (repo root) - drop commissioned wallpaper images here.
-  Only the file named **`wallpaper.jpg`** is actually used; the rest is just
-  storage. Swapping the active wallpaper = replacing that one file, no
-  script changes needed.
-- Every top-level build entry point (`all.sh`, `all-sid.sh`, `ubuntu.sh`,
-  `custom.sh`, `build.sh`, `all-docker.sh`) copies `wallpapers/wallpaper.jpg`
-  into `build/userpatches/overlay/wallpaper.jpg` before building (skipped
-  silently if the file doesn't exist yet). That `overlay` directory is
-  Armbian's own bind-mount, exposed inside the chroot as `/tmp/overlay`.
-- Each desktop's `ConfigureDesktop()` picks the wallpaper up from
-  `/tmp/overlay/wallpaper.jpg` if present:
-  - Cinnamon/MATE: dconf `picture-uri`/`picture-filename`.
-  - XFCE: `xfce4-desktop.xml` `last-image` property.
-  - LXQT: `/etc/xdg/pcmanfm-qt/lxqt/settings.conf`.
-  - labwc: `swaybg` (newly added to the package list) launched from
-    `/etc/xdg/labwc/autostart`.
-
 ## Docker build path (`all-docker.sh`)
 
 New script, same full board/desktop matrix as `all.sh` (20 build groups,

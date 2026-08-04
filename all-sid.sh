@@ -1,9 +1,4 @@
 #!/bin/sh
-if [ -f ./wallpapers/wallpaper.jpg ]; then
-	mkdir -p ./build/userpatches/overlay
-	cp ./wallpapers/wallpaper.jpg ./build/userpatches/overlay/wallpaper.jpg
-fi
-
 . ./vars.sh
 . ./lib-build.sh
 

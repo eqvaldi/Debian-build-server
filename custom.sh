@@ -1,8 +1,4 @@
 #!/bin/sh
-if [ -f ./wallpapers/wallpaper.jpg ]; then
-	mkdir -p ./build/userpatches/overlay
-	cp ./wallpapers/wallpaper.jpg ./build/userpatches/overlay/wallpaper.jpg
-fi
 cmd=(dialog --keep-tite --menu "Debian-build-server-V4" 22 76 16)
 
 options=(1 "Minimal"

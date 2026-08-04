@@ -109,35 +109,6 @@ ConfigureDesktop() {
 	EOF
 	gtk-update-icon-cache -f /usr/share/icons/Numix 2>/dev/null || true
 
-	if [ -f /tmp/overlay/wallpaper.jpg ]; then
-		cp /tmp/overlay/wallpaper.jpg /usr/share/backgrounds/eqlinux-wallpaper.jpg
-		cat > /usr/local/bin/eqlinux-set-wallpaper.sh <<-'EOF'
-		#!/bin/sh
-		WALLPAPER=/usr/share/backgrounds/eqlinux-wallpaper.jpg
-		for i in 1 2 3 4 5; do
-			sleep 2
-			PROPS=$(xfconf-query -c xfce4-desktop -p /backdrop -l 2>/dev/null | grep -E 'last-image$')
-			[ -n "$PROPS" ] && break
-		done
-		for p in $PROPS; do
-			xfconf-query -c xfce4-desktop -p "$p" -s "$WALLPAPER" 2>/dev/null
-		done
-		for p in $(xfconf-query -c xfce4-desktop -p /backdrop -l 2>/dev/null | grep -E 'image-style$'); do
-			xfconf-query -c xfce4-desktop -p "$p" -s 5 2>/dev/null
-		done
-		EOF
-		chmod 755 /usr/local/bin/eqlinux-set-wallpaper.sh
-		mkdir -p /etc/xdg/autostart
-		cat > /etc/xdg/autostart/eqlinux-wallpaper.desktop <<-'EOF'
-		[Desktop Entry]
-		Type=Application
-		Name=EQLinux Wallpaper
-		Exec=/usr/local/bin/eqlinux-set-wallpaper.sh
-		OnlyShowIn=XFCE;
-		X-GNOME-Autostart-enabled=true
-		NoDisplay=true
-		EOF
-	fi
 } # ConfigureDesktop
 
 InstallOpenMediaVault() {
