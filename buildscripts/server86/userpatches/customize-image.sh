@@ -77,7 +77,7 @@ ConfigureDesktop() {
 	<?xml version="1.0" encoding="UTF-8"?>
 	<channel name="xsettings" version="1.0">
 	  <property name="Net" type="empty">
-	    <property name="ThemeName" type="string" value="Orchis"/>
+	    <property name="ThemeName" type="string" value="Orchis-Dark"/>
 	    <property name="IconThemeName" type="string" value="Numix"/>
 	  </property>
 	</channel>
@@ -86,14 +86,14 @@ ConfigureDesktop() {
 	mkdir -p /etc/gtk-3.0
 	cat > /etc/gtk-3.0/settings.ini <<-'EOF'
 	[Settings]
-	gtk-theme-name=Orchis
+	gtk-theme-name=Orchis-Dark
 	gtk-icon-theme-name=Numix
 	gtk-menu-images=1
 	gtk-button-images=1
 	EOF
 	mkdir -p /etc/gtk-2.0
 	cat > /etc/gtk-2.0/gtkrc <<-'EOF'
-	gtk-theme-name="Orchis"
+	gtk-theme-name="Orchis-Dark"
 	gtk-icon-theme-name="Numix"
 	gtk-menu-images=1
 	gtk-button-images=1

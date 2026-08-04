@@ -77,22 +77,27 @@ ConfigureDesktop() {
 	mkdir -p /etc/dconf/profile /etc/dconf/db/local.d
 	echo -e "user-db:user\nsystem-db:local" > /etc/dconf/profile/user
 	cat > /etc/dconf/db/local.d/00-eqlinux-theme <<-EOF
-	[org/mate/desktop/interface]
-	gtk-theme='Orchis'
+	[org/mate/interface]
+	gtk-theme='Orchis-Dark'
 	icon-theme='Numix'
+	menus-have-icons=true
+	buttons-have-icons=true
+
+	[org/mate/marco/general]
+	theme='Orchis-Dark'
 	EOF
 
 	mkdir -p /etc/gtk-3.0
 	cat > /etc/gtk-3.0/settings.ini <<-'EOF'
 	[Settings]
-	gtk-theme-name=Orchis
+	gtk-theme-name=Orchis-Dark
 	gtk-icon-theme-name=Numix
 	gtk-menu-images=1
 	gtk-button-images=1
 	EOF
 	mkdir -p /etc/gtk-2.0
 	cat > /etc/gtk-2.0/gtkrc <<-'EOF'
-	gtk-theme-name="Orchis"
+	gtk-theme-name="Orchis-Dark"
 	gtk-icon-theme-name="Numix"
 	gtk-menu-images=1
 	gtk-button-images=1
