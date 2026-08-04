@@ -91,6 +91,24 @@ ConfigureDesktop() {
 	[org/cinnamon/theme]
 	name='Orchis'
 	EOF
+
+	mkdir -p /etc/gtk-3.0
+	cat > /etc/gtk-3.0/settings.ini <<-'EOF'
+	[Settings]
+	gtk-theme-name=Orchis
+	gtk-icon-theme-name=Numix
+	gtk-menu-images=1
+	gtk-button-images=1
+	EOF
+	mkdir -p /etc/gtk-2.0
+	cat > /etc/gtk-2.0/gtkrc <<-'EOF'
+	gtk-theme-name="Orchis"
+	gtk-icon-theme-name="Numix"
+	gtk-menu-images=1
+	gtk-button-images=1
+	EOF
+	gtk-update-icon-cache -f /usr/share/icons/Numix 2>/dev/null || true
+
 	if [ -f /tmp/overlay/wallpaper.jpg ]; then
 		cp /tmp/overlay/wallpaper.jpg /usr/share/backgrounds/eqlinux-wallpaper.jpg
 		cat > /etc/dconf/db/local.d/01-eqlinux-wallpaper <<-EOF
