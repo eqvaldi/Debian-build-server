@@ -19,6 +19,7 @@ automated build scripts for a Debian based distros for server env.
 
 # Done
 
+* [x] XFCE tested.
 * [x] fix XFCE not theming.
 * [x] fix mate-desktop not theming. (missing dconf-cli meant the dconf db was never compiled)
 * [x] fix Cinnamon-desktop not theming. (same dconf-cli fix)
