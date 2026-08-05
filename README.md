@@ -10,3 +10,6 @@ automated build scripts for a Debian based distros for server env.
 3. Run: bash ./files.sh
 
 4. Then run: bash ./build.sh (As sudo)
+
+# To Do
+
