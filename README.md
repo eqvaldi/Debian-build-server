@@ -15,6 +15,7 @@ automated build scripts for a Debian based distros for server env.
 
 * [ ] fix ubuntu Cinnamon-desktop not theming.
 * [ ] fix ubuntu xfce not theming.
+* [ ] Apply included lxqt dark theme.
 
 # Done
 
