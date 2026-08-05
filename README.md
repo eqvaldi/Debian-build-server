@@ -14,8 +14,8 @@ automated build scripts for a Debian based distros for server env.
 # To Do
 
 * [ ] fix mate-desktop not theming.
-* [ ] fix Cinnamon not theming.
-* [ ] fix ubuntu Cinnamon not theming.
+* [ ] fix Cinnamon-desktop not theming.
+* [ ] fix ubuntu Cinnamon-desktop not theming.
 * [ ] fix ubuntu xfce not theming.
 * [ ] fix lightdm not theming.
 * [ ] apply numix-icon-theme to lxqt-desktop.
