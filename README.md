@@ -20,6 +20,8 @@ automated build scripts for a Debian based distros for server env.
 * [ ] fix lightdm not theming.
 * [ ] apply numix-icon-theme to lxqt-desktop.
 * [ ] apply numix-icon-theme to labwc.
+* [ ] make labwc look like this: https://labwc.github.io/obligatory-screenshot2.html
+https://labwc.github.io/img/scrot1.png
 
 # Done
 
