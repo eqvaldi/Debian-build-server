@@ -98,6 +98,14 @@ ConfigureDesktop() {
 	EOF
 	gtk-update-icon-cache -f /usr/share/icons/Numix 2>/dev/null || true
 
+	mkdir -p /etc/lightdm
+	cat > /etc/lightdm/lightdm-gtk-greeter.conf <<-'EOF'
+	[greeter]
+	theme-name = Orchis-Dark
+	icon-theme-name = Numix
+	font-name = Sans 10
+	EOF
+
 } # ConfigureDesktop
 
 InstallOpenMediaVault() {

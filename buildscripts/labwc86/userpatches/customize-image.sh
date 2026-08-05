@@ -34,13 +34,13 @@ Main() {
 			;;
 		trixie)
 			apt update -y
-			apt install labwc swaybg xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils spek bison flex libsndfile1-dev quakespasm glmark2* -y
+			apt install labwc xfce4-terminal xfce4-panel pcmanfm-qt file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils spek bison flex libsndfile1-dev quakespasm glmark2* -y
 			ConfigureDesktop
 			apt clean
 			;;
 		sid)
 			apt update -y
-			apt install labwc swaybg xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
+			apt install labwc xfce4-terminal xfce4-panel pcmanfm-qt file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			ConfigureDesktop
 			apt clean
 			;;
@@ -57,19 +57,84 @@ ConfigureDesktop() {
 	mkdir -p /etc/gtk-3.0
 	cat > /etc/gtk-3.0/settings.ini <<-'EOF'
 	[Settings]
-	gtk-theme-name=Orchis
+	gtk-theme-name=Orchis-Dark
 	gtk-icon-theme-name=Numix
 	gtk-menu-images=1
 	gtk-button-images=1
 	EOF
 	mkdir -p /etc/gtk-2.0
 	cat > /etc/gtk-2.0/gtkrc <<-'EOF'
-	gtk-theme-name="Orchis"
+	gtk-theme-name="Orchis-Dark"
 	gtk-icon-theme-name="Numix"
 	gtk-menu-images=1
 	gtk-button-images=1
 	EOF
 	gtk-update-icon-cache -f /usr/share/icons/Numix 2>/dev/null || true
+
+	mkdir -p /etc/lightdm
+	cat > /etc/lightdm/lightdm-gtk-greeter.conf <<-'EOF'
+	[greeter]
+	theme-name = Orchis-Dark
+	icon-theme-name = Numix
+	font-name = Sans 10
+	EOF
+
+	mkdir -p /etc/xdg/labwc
+	cat > /etc/xdg/labwc/rc.xml <<-'EOF'
+	<?xml version="1.0"?>
+	<labwc_config>
+	  <core>
+	    <gapSingle>0</gapSingle>
+	  </core>
+	  <theme>
+	    <name>Orchis-Dark</name>
+	    <titlebar>
+	      <height>28</height>
+	    </titlebar>
+	  </theme>
+	  <keyboard>
+	    <default />
+	  </keyboard>
+	  <mouse>
+	    <default />
+	  </mouse>
+	</labwc_config>
+	EOF
+
+	mkdir -p /etc/xdg/labwc
+	cat > /etc/xdg/labwc/menu.xml <<-'EOF'
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openbox_menu>
+	  <menu id="root-menu" label="EQLinux">
+	    <item label="Terminal"><action name="Execute"><command>xfce4-terminal</command></action></item>
+	    <item label="File Manager"><action name="Execute"><command>pcmanfm-qt</command></action></item>
+	    <item label="Archive Manager"><action name="Execute"><command>file-roller</command></action></item>
+	    <item label="Image Viewer"><action name="Execute"><command>ristretto</command></action></item>
+	    <item label="Web Browser"><action name="Execute"><command>chromium</command></action></item>
+	    <separator />
+	    <item label="Lock Screen"><action name="Execute"><command>light-locker-command -l</command></action></item>
+	    <item label="Exit"><action name="Exit" />
+	    </item>
+	  </menu>
+	</openbox_menu>
+	EOF
+
+	mkdir -p /etc/xdg/labwc
+	cat > /etc/xdg/labwc/autostart <<-'EOF'
+	export GTK_THEME=Orchis-Dark
+	export XCURSOR_THEME=Adwaita
+	pcmanfm-qt --desktop &
+	xfce4-panel &
+	EOF
+
+	mkdir -p /etc/xdg/pcmanfm-qt/lxqt
+	cat > /etc/xdg/pcmanfm-qt/lxqt/settings.conf <<-'EOF'
+	[Desktop]
+	Wallpaper=
+	WallpaperMode=color
+	DesktopBgColor=#161616
+	DesktopFgColor=#e8e8e8
+	EOF
 
 } # ConfigureDesktop
 
