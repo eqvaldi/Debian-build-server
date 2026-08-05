@@ -20,3 +20,7 @@ automated build scripts for a Debian based distros for server env.
 * [ ] fix lightdm not theming.
 * [ ] apply numix-icon-theme to lxqt-desktop.
 * [ ] apply numix-icon-theme to labwc.
+
+# Done
+
+[x] fix XFCE not theming.
