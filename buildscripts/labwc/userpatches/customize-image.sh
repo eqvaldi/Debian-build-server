@@ -33,6 +33,7 @@ Main() {
 		
 			;;
 		trixie)
+		
 			;;
 		sid)
 			apt update -y
@@ -41,7 +42,7 @@ Main() {
 			apt clean
 			;;
 		bionic)
-			# your code here
+			
 			;;
 		focal)
 
