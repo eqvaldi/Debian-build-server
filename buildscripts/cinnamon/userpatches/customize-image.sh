@@ -56,19 +56,61 @@ Main() {
 			apt update -y
 			apt install cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils spek bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			gsettings set org.cinnamon.desktop.interface gtk-theme Orchis-Dark
-			gsettings set org.cinnamon.desktop.interface icon-theme Numix
-			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
-			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+			# 2. Define the global GLib/GSettings schema override path for Cinnamon
+			CINNAMON_OVERRIDE="/usr/share/glib-2.0/schemas/99_cinnamon_custom_theme.gschema.override"
+			install -D /dev/null "$CINNAMON_OVERRIDE"
+
+			# 3. Inject Cinnamon interface parameters (GTK Theme, Icon Theme, Window Frame, and Desktop Shell Theme)
+			echo '[org.cinnamon.desktop.interface]' > "$CINNAMON_OVERRIDE"
+			echo "gtk-theme='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
+			echo "icon-theme='Numix'" >> "$CINNAMON_OVERRIDE"
+			echo "" >> "$CINNAMON_OVERRIDE"
+			echo '[org.cinnamon.desktop.wm.preferences]' >> "$CINNAMON_OVERRIDE"
+			echo "theme='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
+			echo "" >> "$CINNAMON_OVERRIDE"
+			echo '[org.cinnamon.theme]' >> "$CINNAMON_OVERRIDE"
+			echo "name='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
+
+			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			glib-compile-schemas /usr/share/glib-2.0/schemas/
+
+			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
    		sid)
 			apt update -y
 			apt install cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			gsettings set org.cinnamon.desktop.interface gtk-theme Orchis-Dark
-			gsettings set org.cinnamon.desktop.interface icon-theme Numix
-			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
-			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+			# 2. Define the global GLib/GSettings schema override path for Cinnamon
+			CINNAMON_OVERRIDE="/usr/share/glib-2.0/schemas/99_cinnamon_custom_theme.gschema.override"
+			install -D /dev/null "$CINNAMON_OVERRIDE"
+
+			# 3. Inject Cinnamon interface parameters (GTK Theme, Icon Theme, Window Frame, and Desktop Shell Theme)
+			echo '[org.cinnamon.desktop.interface]' > "$CINNAMON_OVERRIDE"
+			echo "gtk-theme='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
+			echo "icon-theme='Numix'" >> "$CINNAMON_OVERRIDE"
+			echo "" >> "$CINNAMON_OVERRIDE"
+			echo '[org.cinnamon.desktop.wm.preferences]' >> "$CINNAMON_OVERRIDE"
+			echo "theme='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
+			echo "" >> "$CINNAMON_OVERRIDE"
+			echo '[org.cinnamon.theme]' >> "$CINNAMON_OVERRIDE"
+			echo "name='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
+
+			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			glib-compile-schemas /usr/share/glib-2.0/schemas/
+
+			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
 		bionic)
 			# your code here

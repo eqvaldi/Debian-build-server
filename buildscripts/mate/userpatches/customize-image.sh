@@ -56,21 +56,59 @@ Main() {
 			apt update -y
 			apt install caja dconf-gsettings-backend fonts-cantarell orchis-gtk-theme numix-icon-theme f3 gvfs-backends marco mate-control-center mate-desktop mate-icon-theme mate-menus mate-notification-daemon mate-panel mate-polkit mate-session-manager mate-settings-daemon mate-terminal mate-themes file-roller network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eom xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse pluma inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk xfce4-notifyd mate-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac libjpeg-dev xfce4-screenshooter libglx-mesa0 libgl1-mesa-dri gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils spek bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			gsettings set org.mate.interface icon-theme Numix
-			gsettings set org.mate.interface gtk-theme Orchis-Dark
-			gsettings set org.mate.Marco.general theme Orchis-Dark
-			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
-			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+			# 2. Define the global GLib/GSettings schema override path
+			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
+			install -D /dev/null "$MATE_OVERRIDE"
+
+			# 3. Inject core interface parameters (Theme, Icons, Window Border, and Menu Icons)
+			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
+			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
+			echo "menus-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "buttons-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
+			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+
+			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			glib-compile-schemas /usr/share/glib-2.0/schemas/
+
+			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
    		sid)
 			apt update -y
 			apt install caja dconf-gsettings-backend fonts-cantarell orchis-gtk-theme numix-icon-theme f3 gvfs-backends marco mate-control-center mate-desktop mate-icon-theme mate-menus mate-notification-daemon mate-panel mate-polkit mate-session-manager mate-settings-daemon mate-terminal mate-themes file-roller network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eom xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse pluma inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk xfce4-notifyd mate-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac libjpeg-dev xfce4-screenshooter libglx-mesa0 libgl1-mesa-dri gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			gsettings set org.mate.interface icon-theme Numix
-			gsettings set org.mate.interface gtk-theme Orchis-Dark
-			gsettings set org.mate.Marco.general theme Orchis-Dark
-			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
-			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+			# 2. Define the global GLib/GSettings schema override path
+			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
+			install -D /dev/null "$MATE_OVERRIDE"
+
+			# 3. Inject core interface parameters (Theme, Icons, Window Border, and Menu Icons)
+			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
+			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
+			echo "menus-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "buttons-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
+			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+
+			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			glib-compile-schemas /usr/share/glib-2.0/schemas/
+
+			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
 		bionic)
 			# your code here

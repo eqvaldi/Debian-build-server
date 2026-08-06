@@ -54,25 +54,101 @@ Main() {
 			;;
 		trixie)
 			apt update -y
-			apt install desktop-file-utils lxqt-config lxqt-globalkeys numix-icon-theme f3 lxqt-notificationd lxqt-panel lxqt-policykit lxqt-qtplugin lxqt-runner lxqt-session lxqt-system-theme lxqt-themes openbox obconf-qt lxqt-powermanagement lxqt-qtplugin xorg xinit pcmanfm-qt featherpad lximage-qt qterminal file-roller pulseaudio pulseaudio-module-bluetooth pavucontrol-qt galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings lightdm synaptic gdebi htop gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-qt tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libcurl4-openssl-dev libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils spek bison flex libsndfile1-dev firmware-nvidia-gsp pciutils quakespasm glmark2* -y
+			apt install desktop-file-utils lxqt-config lxqt-globalkeys orchis-gtk-theme numix-icon-theme f3 lxqt-notificationd lxqt-panel lxqt-policykit lxqt-qtplugin lxqt-runner lxqt-session lxqt-system-theme lxqt-themes openbox obconf-qt lxqt-powermanagement lxqt-qtplugin xorg xinit pcmanfm-qt featherpad lximage-qt qterminal file-roller pulseaudio pulseaudio-module-bluetooth pavucontrol-qt galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings lightdm synaptic gdebi htop gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-qt tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libcurl4-openssl-dev libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils spek bison flex libsndfile1-dev firmware-nvidia-gsp pciutils quakespasm glmark2* -y
 			apt clean
-			sed -i 's/^icon_theme=.*/icon_theme=Numix/' ~/.config/lxqt/session.conf
-			sed -i 's/^theme=.*/theme=Ambiance-Dark/' ~/.config/lxqt/session.conf
-			pcmanfm-qt --set-wallpaper=/usr/share/backgrounds/lxqt-dark.png --wallpaper-mode=stretch
-			sed -i 's|<name>.*</name>|<name>Nightmare</name>|g' ~/.config/openbox/rc.xml
-			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
-			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
-			;;	
+			# 1. Target global LXQt initialization environment profile
+			GLOBAL_LXQT_SESSION="/etc/xdg/lxqt/session.conf"
+			install -D /dev/null "$GLOBAL_LXQT_SESSION"
+			echo '[General]' > "$GLOBAL_LXQT_SESSION"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_SESSION"
+			echo '[Qt]' >> "$GLOBAL_LXQT_SESSION"
+			echo 'style=Fusion' >> "$GLOBAL_LXQT_SESSION"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_SESSION"
+			echo '[Gtk]' >> "$GLOBAL_LXQT_SESSION"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_SESSION"
+			echo 'theme=Orchis-Dark' >> "$GLOBAL_LXQT_SESSION"
+			echo '[lxqt]' >> "$GLOBAL_LXQT_SESSION"
+			echo 'theme=frost' >> "$GLOBAL_LXQT_SESSION"
+			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_SESSION"
+
+			# 2. FIX: Mirror the Frost layout parameters to the primary tracker file
+			GLOBAL_LXQT_MAIN="/etc/xdg/lxqt/lxqt.conf"
+			install -D /dev/null "$GLOBAL_LXQT_MAIN"
+			echo '[General]' > "$GLOBAL_LXQT_MAIN"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_MAIN"
+			echo 'theme=frost' >> "$GLOBAL_LXQT_MAIN"
+			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_MAIN"
+
+			# 3. Target global OpenBox configuration and set window frame layout 
+			GLOBAL_OPENBOX="/etc/xdg/openbox/rc.xml"
+			install -D /dev/null "$GLOBAL_OPENBOX"
+			echo '<?xml version="1.0" encoding="UTF-8"?><openbox_config xmlns="http://openbox.org"><theme><name>Nightmare</name><font place="ActiveWindow"><name>sans</name><size>10</size><weight>bold</weight><slant>normal</slant></font></theme></openbox_config>' > "$GLOBAL_OPENBOX"
+
+			# 4. Handle default backup asset allocation for file manager (pcmanfm-qt)
+			GLOBAL_PCMANFM="/etc/xdg/pcmanfm-qt/default/settings.conf"
+			install -D /dev/null "$GLOBAL_PCMANFM"
+			echo '[Volume]' >> "$GLOBAL_PCMANFM"
+			echo 'show_wm_menu=true' >> "$GLOBAL_PCMANFM"
+			echo '[Desktop]' >> "$GLOBAL_PCMANFM"
+			echo 'Wallpaper=/usr/share/backgrounds/lxqt-dark.png' >> "$GLOBAL_PCMANFM"
+			echo 'WallpaperMode=stretch' >> "$GLOBAL_PCMANFM"
+
+			# 5. Route LightDM overrides via highest alphabetical processing tag
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			;;
    		sid)
 			apt update -y
-			apt install desktop-file-utils lxqt-config lxqt-globalkeys numix-icon-theme f3 lxqt-notificationd lxqt-panel lxqt-policykit lxqt-qtplugin lxqt-runner lxqt-session lxqt-system-theme lxqt-themes openbox obconf-qt lxqt-powermanagement lxqt-qtplugin xorg xinit pcmanfm-qt featherpad lximage-qt qterminal file-roller pulseaudio pulseaudio-module-bluetooth pavucontrol-qt galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings lightdm synaptic gdebi htop gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-qt tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libcurl4-openssl-dev libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev firmware-nvidia-gsp pciutils quakespasm glmark2* -y
+			apt install desktop-file-utils lxqt-config lxqt-globalkeys orchis-gtk-theme numix-icon-theme f3 lxqt-notificationd lxqt-panel lxqt-policykit lxqt-qtplugin lxqt-runner lxqt-session lxqt-system-theme lxqt-themes openbox obconf-qt lxqt-powermanagement lxqt-qtplugin xorg xinit pcmanfm-qt featherpad lximage-qt qterminal file-roller pulseaudio pulseaudio-module-bluetooth pavucontrol-qt galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings lightdm synaptic gdebi htop gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-qt tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libcurl4-openssl-dev libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev firmware-nvidia-gsp pciutils quakespasm glmark2* -y
 			apt clean
-			sed -i 's/^icon_theme=.*/icon_theme=Numix/' ~/.config/lxqt/session.conf
-			sed -i 's/^theme=.*/theme=Ambiance-Dark/' ~/.config/lxqt/session.conf
-			pcmanfm-qt --set-wallpaper=/usr/share/backgrounds/lxqt-dark.png --wallpaper-mode=stretch
-			sed -i 's|<name>.*</name>|<name>Nightmare</name>|g' ~/.config/openbox/rc.xml
-			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
-			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+			# 1. Target global LXQt initialization environment profile
+			GLOBAL_LXQT_SESSION="/etc/xdg/lxqt/session.conf"
+			install -D /dev/null "$GLOBAL_LXQT_SESSION"
+			echo '[General]' > "$GLOBAL_LXQT_SESSION"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_SESSION"
+			echo '[Qt]' >> "$GLOBAL_LXQT_SESSION"
+			echo 'style=Fusion' >> "$GLOBAL_LXQT_SESSION"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_SESSION"
+			echo '[Gtk]' >> "$GLOBAL_LXQT_SESSION"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_SESSION"
+			echo 'theme=Orchis-Dark' >> "$GLOBAL_LXQT_SESSION"
+			echo '[lxqt]' >> "$GLOBAL_LXQT_SESSION"
+			echo 'theme=frost' >> "$GLOBAL_LXQT_SESSION"
+			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_SESSION"
+
+			# 2. FIX: Mirror the Frost layout parameters to the primary tracker file
+			GLOBAL_LXQT_MAIN="/etc/xdg/lxqt/lxqt.conf"
+			install -D /dev/null "$GLOBAL_LXQT_MAIN"
+			echo '[General]' > "$GLOBAL_LXQT_MAIN"
+			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_MAIN"
+			echo 'theme=frost' >> "$GLOBAL_LXQT_MAIN"
+			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_MAIN"
+
+			# 3. Target global OpenBox configuration and set window frame layout 
+			GLOBAL_OPENBOX="/etc/xdg/openbox/rc.xml"
+			install -D /dev/null "$GLOBAL_OPENBOX"
+			echo '<?xml version="1.0" encoding="UTF-8"?><openbox_config xmlns="http://openbox.org"><theme><name>Nightmare</name><font place="ActiveWindow"><name>sans</name><size>10</size><weight>bold</weight><slant>normal</slant></font></theme></openbox_config>' > "$GLOBAL_OPENBOX"
+
+			# 4. Handle default backup asset allocation for file manager (pcmanfm-qt)
+			GLOBAL_PCMANFM="/etc/xdg/pcmanfm-qt/default/settings.conf"
+			install -D /dev/null "$GLOBAL_PCMANFM"
+			echo '[Volume]' >> "$GLOBAL_PCMANFM"
+			echo 'show_wm_menu=true' >> "$GLOBAL_PCMANFM"
+			echo '[Desktop]' >> "$GLOBAL_PCMANFM"
+			echo 'Wallpaper=/usr/share/backgrounds/lxqt-dark.png' >> "$GLOBAL_PCMANFM"
+			echo 'WallpaperMode=stretch' >> "$GLOBAL_PCMANFM"
+
+			# 5. Route LightDM overrides via highest alphabetical processing tag
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
 		bionic)
 			# your code here
