@@ -60,6 +60,8 @@ Main() {
 			sed -i 's/^theme=.*/theme=Ambiance-Dark/' ~/.config/lxqt/session.conf
 			pcmanfm-qt --set-wallpaper=/usr/share/backgrounds/lxqt-dark.png --wallpaper-mode=stretch
 			sed -i 's|<name>.*</name>|<name>Nightmare</name>|g' ~/.config/openbox/rc.xml
+			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
+			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
 			;;	
    		sid)
 			apt update -y
@@ -69,6 +71,8 @@ Main() {
 			sed -i 's/^theme=.*/theme=Ambiance-Dark/' ~/.config/lxqt/session.conf
 			pcmanfm-qt --set-wallpaper=/usr/share/backgrounds/lxqt-dark.png --wallpaper-mode=stretch
 			sed -i 's|<name>.*</name>|<name>Nightmare</name>|g' ~/.config/openbox/rc.xml
+			sed -i 's/^#\?theme-name =.*/theme-name = Orchis-dark/' /etc/lightdm/lightdm-gtk-greeter.conf
+			sed -i 's/^#\?icon-theme-name =.*/icon-theme-name = Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
 			;;	
 		bionic)
 			# your code here
