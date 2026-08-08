@@ -110,9 +110,27 @@ Main() {
 			;;
 		resolute)
 			apt update -y
-			apt install snapd xfce4 xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
-			snap install chromium-browser -y
+			apt install xfce4 xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
+			# 1. Define global system paths directly
+			GLOBAL_XSET="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
+			GLOBAL_XFWM="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
+
+			# 2. Write global layouts (Injected MenuImages & ButtonImages toggles)
+			install -D /dev/null "$GLOBAL_XSET"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xsettings" version="1.0"><property name="Net" type="empty"><property name="ThemeName" type="string" value="Orchis-Dark"/><property name="IconThemeName" type="string" value="Numix"/></property><property name="Gtk" type="empty"><property name="MenuImages" type="bool" value="true"/><property name="ButtonImages" type="bool" value="true"/></property></channel>' > "$GLOBAL_XSET"
+
+			# 3. Write global window borders layout
+			install -D /dev/null "$GLOBAL_XFWM"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfwm4" version="1.0"><property name="general" type="empty"><property name="theme" type="string" value="Orchis-Dark"/></property></channel>' > "$GLOBAL_XFWM"
+
+			# 4. Force LightDM to apply theme via high-priority override file
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
 	esac
 } # Main

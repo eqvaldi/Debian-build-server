@@ -37,8 +37,41 @@ Main() {
 			;;			
 		sid)
 			apt update -y
-			apt install labwc labwc-menu-generator labwc-tweaks xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
+			apt install labwc labwc-menu-generator labwc-tweaks seatd polkitd lightdm xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings ristretto lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
+			# 1. Define global Labwc system configuration paths
+			LABWC_RC="/etc/xdg/labwc/rc.xml"
+
+			# 2. Initialize the configuration file safely (forces directory creation)
+			install -D /dev/null "$LABWC_RC"
+
+			# 3. Write Labwc XML content line-by-line using simple echo statements
+			echo '<?xml version="1.0" encoding="UTF-8"?>' > "$LABWC_RC"
+			echo '<labwc_config>' >> "$LABWC_RC"
+			echo '  <theme>' >> "$LABWC_RC"
+			echo '    <name>Orchis-Dark</name>' >> "$LABWC_RC"
+			echo '    <iconTheme>Numix</iconTheme>' >> "$LABWC_RC"
+			echo '    <font place="ActiveWindow"><name>sans</name><size>10</size><weight>bold</weight></font>' >> "$LABWC_RC"
+			echo '    <font place="InactiveWindow"><name>sans</name><size>10</size><weight>normal</weight></font>' >> "$LABWC_RC"
+			echo '    <titleLayout>NLMC</titleLayout>' >> "$LABWC_RC"
+			echo '    <cornerRadius>4</cornerRadius>' >> "$LABWC_RC"
+			echo '    <gap>6</gap>' >> "$LABWC_RC"
+			echo '  </theme>' >> "$LABWC_RC"
+			echo '  <keyboard>' >> "$LABWC_RC"
+			echo '    <default />' >> "$LABWC_RC"
+			echo '    <keybind key="A-F4"><action name="Close" /></keybind>' >> "$LABWC_RC"
+			echo '    <keybind key="W-Return"><action name="Execute" command="xfce4-terminal" /></keybind>' >> "$LABWC_RC"
+			echo '  </keyboard>' >> "$LABWC_RC"
+			echo '  <mouse><default /></mouse>' >> "$LABWC_RC"
+			echo '</labwc_config>' >> "$LABWC_RC"
+
+			# 4. Force LightDM theme configurations using our reliable high-priority file override
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
 		bionic)
 			# your code here
