@@ -56,11 +56,23 @@ Main() {
 			apt update -y
 			apt install caja dconf-gsettings-backend fonts-cantarell orchis-gtk-theme numix-icon-theme f3 gvfs-backends marco mate-control-center mate-desktop mate-icon-theme mate-menus mate-notification-daemon mate-panel mate-polkit mate-session-manager mate-settings-daemon mate-terminal mate-themes file-roller network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eom xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse pluma inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk xfce4-notifyd mate-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac libjpeg-dev xfce4-screenshooter libglx-mesa0 libgl1-mesa-dri gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils spek bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			# 2. Define the global GLib/GSettings schema override path
+			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
+			WP_DIR="/usr/share/backgrounds/eqvaldi"
+			install -D /dev/null "$WP_DIR/placeholder"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
+			rm -f "$WP_DIR/placeholder"
+
+			# 2. Ensure a readable copy exists for the LightDM greeter at the root backgrounds track
+			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
+			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
+
+			# 3. Define the global GLib/GSettings schema override path
 			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
 			install -D /dev/null "$MATE_OVERRIDE"
 
-			# 3. Inject core interface parameters (Theme, Icons, Window Border, and Menu Icons)
+			# 4. Inject core interface parameters (Theme, Icons, Window Border, Menu Icons, and Wallpaper keys)
 			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
 			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
 			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
@@ -69,27 +81,45 @@ Main() {
 			echo "" >> "$MATE_OVERRIDE"
 			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
 			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			# FIX: Inject keys to set the background image path and style parameters for MATE
+			echo '[org.mate.background]' >> "$MATE_OVERRIDE"
+			echo "picture-filename='/usr/share/backgrounds/eqvaldi/Wallpaper1.png'" >> "$MATE_OVERRIDE"
+			echo "picture-options='zoom'" >> "$MATE_OVERRIDE"
 
-			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			# 5. CRITICAL: Compile the newly added schema override inside the chroot rootfs
 			glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			# 6. Force LightDM theme configurations using our reliable high-priority file override
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
    		sid)
 			apt update -y
 			apt install caja dconf-gsettings-backend fonts-cantarell orchis-gtk-theme numix-icon-theme f3 gvfs-backends marco mate-control-center mate-desktop mate-icon-theme mate-menus mate-notification-daemon mate-panel mate-polkit mate-session-manager mate-settings-daemon mate-terminal mate-themes file-roller network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eom xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse pluma inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk xfce4-notifyd mate-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac libjpeg-dev xfce4-screenshooter libglx-mesa0 libgl1-mesa-dri gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			# 2. Define the global GLib/GSettings schema override path
+			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
+			WP_DIR="/usr/share/backgrounds/eqvaldi"
+			install -D /dev/null "$WP_DIR/placeholder"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
+			rm -f "$WP_DIR/placeholder"
+
+			# 2. Ensure a readable copy exists for the LightDM greeter at the root backgrounds track
+			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
+			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
+
+			# 3. Define the global GLib/GSettings schema override path
 			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
 			install -D /dev/null "$MATE_OVERRIDE"
 
-			# 3. Inject core interface parameters (Theme, Icons, Window Border, and Menu Icons)
+			# 4. Inject core interface parameters (Theme, Icons, Window Border, Menu Icons, and Wallpaper keys)
 			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
 			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
 			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
@@ -98,23 +128,73 @@ Main() {
 			echo "" >> "$MATE_OVERRIDE"
 			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
 			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			# FIX: Inject keys to set the background image path and style parameters for MATE
+			echo '[org.mate.background]' >> "$MATE_OVERRIDE"
+			echo "picture-filename='/usr/share/backgrounds/eqvaldi/Wallpaper1.png'" >> "$MATE_OVERRIDE"
+			echo "picture-options='zoom'" >> "$MATE_OVERRIDE"
 
-			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			# 5. CRITICAL: Compile the newly added schema override inside the chroot rootfs
 			glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			# 6. Force LightDM theme configurations using our reliable high-priority file override
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
-			;;	
+			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
+			;;
 		bionic)
 			# your code here
 			;;
-		focal)
-			
+		resolute)
+			apt update -y
+			apt install caja dconf-gsettings-backend fonts-cantarell orchis-gtk-theme numix-icon-theme f3 gvfs-backends marco mate-control-center mate-desktop mate-icon-theme mate-menus mate-notification-daemon mate-panel mate-polkit mate-session-manager mate-settings-daemon mate-terminal mate-themes file-roller network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eom xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse pluma inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk xfce4-notifyd mate-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac libjpeg-dev xfce4-screenshooter libglx-mesa0 libgl1-mesa-dri gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
+			apt clean
+			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
+			WP_DIR="/usr/share/backgrounds/eqvaldi"
+			install -D /dev/null "$WP_DIR/placeholder"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
+			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
+			rm -f "$WP_DIR/placeholder"
+
+			# 2. Ensure a readable copy exists for the LightDM greeter at the root backgrounds track
+			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
+			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
+
+			# 3. Define the global GLib/GSettings schema override path
+			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
+			install -D /dev/null "$MATE_OVERRIDE"
+
+			# 4. Inject core interface parameters (Theme, Icons, Window Border, Menu Icons, and Wallpaper keys)
+			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
+			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
+			echo "menus-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "buttons-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
+			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			# FIX: Inject keys to set the background image path and style parameters for MATE
+			echo '[org.mate.background]' >> "$MATE_OVERRIDE"
+			echo "picture-filename='/usr/share/backgrounds/eqvaldi/Wallpaper1.png'" >> "$MATE_OVERRIDE"
+			echo "picture-options='zoom'" >> "$MATE_OVERRIDE"
+
+			# 5. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			glib-compile-schemas /usr/share/glib-2.0/schemas/
+
+			# 6. Force LightDM theme configurations using our reliable high-priority file override
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
 	esac
 } # Main
