@@ -54,36 +54,19 @@ Main() {
 			apt update -y
 			apt install xfce4 xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome libmtp-runtime light-locker hyfetch lightdm-gtk-greeter-settings xorg lightdm htop gnome-icon-theme usb-modeswitch genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev flac libjpeg-dev xfce4-screenshooter thunar-archive-plugin gufw libglx-mesa0 libgl1-mesa-dri chromium bash-completion alsa-utils apt-utils sudo firmware-sof-signed alsa-firmware-loaders cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils spek bison flex glmark2* -y
 			apt clean
-			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
-			WP_DIR="/usr/share/backgrounds/eqvaldi"
-			install -D /dev/null "$WP_DIR/placeholder"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
-			rm -f "$WP_DIR/placeholder"
-
-			# 2. FIX: Ensure a high-permission copy exists in the base directory for LightDM
-			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
-			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
-
-			# 3. Define global system paths directly
+			# 1. Define global system paths directly
 			GLOBAL_XSET="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 			GLOBAL_XFWM="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
-			GLOBAL_XFDESK="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
 
-			# 4. Write global layouts (Injected MenuImages & ButtonImages toggles)
+			# 2. Write global layouts (FIXED: Injected MenuImages & ButtonImages toggles)
 			install -D /dev/null "$GLOBAL_XSET"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xsettings" version="1.0"><property name="Net" type="empty"><property name="ThemeName" type="string" value="Orchis-Dark"/><property name="IconThemeName" type="string" value="Numix"/></property><property name="Gtk" type="empty"><property name="MenuImages" type="bool" value="true"/><property name="ButtonImages" type="bool" value="true"/></property></channel>' > "$GLOBAL_XSET"
 
-			# 5. Write global window borders layout
+			# 3. Write global window borders layout
 			install -D /dev/null "$GLOBAL_XFWM"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfwm4" version="1.0"><property name="general" type="empty"><property name="theme" type="string" value="Orchis-Dark"/></property></channel>' > "$GLOBAL_XFWM"
 
-			# 6. Lock down the new default wallpaper for the XFCE desktop environment
-			install -D /dev/null "$GLOBAL_XFDESK"
-			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-desktop" version="1.0"><property name="backdrop" type="empty"><property name="screen0" type="empty"><property name="monitor0" type="empty"><property name="last-image" type="string" value="/usr/share/backgrounds/eqvaldi/Wallpaper1.png"/><property name="image-style" type="int" value="5"/></property></monitor0></screen0></backdrop></channel>' > "$GLOBAL_XFDESK"
-
-			# 7. Force LightDM to apply theme and wallpaper via high-priority override file
+			# 4. Force LightDM to apply theme via high-priority override file
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			
@@ -91,42 +74,24 @@ Main() {
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
-			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
-			;;	
+			;;		
 		sid)
 			apt update -y
 			apt install xfce4 xfce4-terminal file-roller orchis-gtk-theme numix-icon-theme f3 network-manager-gnome libmtp-runtime light-locker hyfetch lightdm-gtk-greeter-settings xorg lightdm htop gnome-icon-theme usb-modeswitch genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev flac libjpeg-dev xfce4-screenshooter thunar-archive-plugin gufw libglx-mesa0 libgl1-mesa-dri chromium bash-completion alsa-utils apt-utils sudo firmware-sof-signed alsa-firmware-loaders cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils sox bison flex glmark2* -y
 			apt clean
-			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
-			WP_DIR="/usr/share/backgrounds/eqvaldi"
-			install -D /dev/null "$WP_DIR/placeholder"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
-			rm -f "$WP_DIR/placeholder"
-
-			# 2. FIX: Ensure a high-permission copy exists in the base directory for LightDM
-			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
-			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
-
-			# 3. Define global system paths directly
+			# 1. Define global system paths directly
 			GLOBAL_XSET="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 			GLOBAL_XFWM="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
-			GLOBAL_XFDESK="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
 
-			# 4. Write global layouts (Injected MenuImages & ButtonImages toggles)
+			# 2. Write global layouts (FIXED: Injected MenuImages & ButtonImages toggles)
 			install -D /dev/null "$GLOBAL_XSET"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xsettings" version="1.0"><property name="Net" type="empty"><property name="ThemeName" type="string" value="Orchis-Dark"/><property name="IconThemeName" type="string" value="Numix"/></property><property name="Gtk" type="empty"><property name="MenuImages" type="bool" value="true"/><property name="ButtonImages" type="bool" value="true"/></property></channel>' > "$GLOBAL_XSET"
 
-			# 5. Write global window borders layout
+			# 3. Write global window borders layout
 			install -D /dev/null "$GLOBAL_XFWM"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfwm4" version="1.0"><property name="general" type="empty"><property name="theme" type="string" value="Orchis-Dark"/></property></channel>' > "$GLOBAL_XFWM"
 
-			# 6. Lock down the new default wallpaper for the XFCE desktop environment
-			install -D /dev/null "$GLOBAL_XFDESK"
-			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-desktop" version="1.0"><property name="backdrop" type="empty"><property name="screen0" type="empty"><property name="monitor0" type="empty"><property name="last-image" type="string" value="/usr/share/backgrounds/eqvaldi/Wallpaper1.png"/><property name="image-style" type="int" value="5"/></property></monitor0></screen0></backdrop></channel>' > "$GLOBAL_XFDESK"
-
-			# 7. Force LightDM to apply theme and wallpaper via high-priority override file
+			# 4. Force LightDM to apply theme via high-priority override file
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			
@@ -134,7 +99,6 @@ Main() {
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
-			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	   
 		bionic)
 			# your code here

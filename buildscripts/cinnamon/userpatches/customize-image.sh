@@ -56,23 +56,11 @@ Main() {
 			apt update -y
 			apt install cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils spek bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
-			WP_DIR="/usr/share/backgrounds/eqvaldi"
-			install -D /dev/null "$WP_DIR/placeholder"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
-			rm -f "$WP_DIR/placeholder"
-
-			# 2. Ensure a readable copy exists for the LightDM greeter at the root backgrounds track
-			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
-			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
-
-			# 3. Define the global GLib/GSettings schema override path for Cinnamon
+			# 2. Define the global GLib/GSettings schema override path for Cinnamon
 			CINNAMON_OVERRIDE="/usr/share/glib-2.0/schemas/99_cinnamon_custom_theme.gschema.override"
 			install -D /dev/null "$CINNAMON_OVERRIDE"
 
-			# 4. Inject Cinnamon interface parameters (GTK Theme, Icon Theme, Window Frame, Shell Theme, and Custom Wallpaper keys)
+			# 3. Inject Cinnamon interface parameters (GTK Theme, Icon Theme, Window Frame, and Desktop Shell Theme)
 			echo '[org.cinnamon.desktop.interface]' > "$CINNAMON_OVERRIDE"
 			echo "gtk-theme='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
 			echo "icon-theme='Numix'" >> "$CINNAMON_OVERRIDE"
@@ -82,45 +70,27 @@ Main() {
 			echo "" >> "$CINNAMON_OVERRIDE"
 			echo '[org.cinnamon.theme]' >> "$CINNAMON_OVERRIDE"
 			echo "name='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
-			echo "" >> "$CINNAMON_OVERRIDE"
-			# FIX: Inject keys to set the background image path and option parameters
-			echo '[org.cinnamon.desktop.background]' >> "$CINNAMON_OVERRIDE"
-			echo "picture-uri='file:///usr/share/backgrounds/eqvaldi/Wallpaper1.png'" >> "$CINNAMON_OVERRIDE"
-			echo "picture-options='scaled'" >> "$CINNAMON_OVERRIDE"
 
-			# 5. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
 			glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-			# 6. Force LightDM theme configurations using our reliable high-priority file override
+			# 5. Force LightDM theme configurations using our reliable high-priority file override
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
-			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
    		sid)
 			apt update -y
 			apt install cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
-			WP_DIR="/usr/share/backgrounds/eqvaldi"
-			install -D /dev/null "$WP_DIR/placeholder"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
-			rm -f "$WP_DIR/placeholder"
-
-			# 2. Ensure a readable copy exists for the LightDM greeter at the root backgrounds track
-			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
-			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
-
-			# 3. Define the global GLib/GSettings schema override path for Cinnamon
+			# 2. Define the global GLib/GSettings schema override path for Cinnamon
 			CINNAMON_OVERRIDE="/usr/share/glib-2.0/schemas/99_cinnamon_custom_theme.gschema.override"
 			install -D /dev/null "$CINNAMON_OVERRIDE"
 
-			# 4. Inject Cinnamon interface parameters (GTK Theme, Icon Theme, Window Frame, Shell Theme, and Custom Wallpaper keys)
+			# 3. Inject Cinnamon interface parameters (GTK Theme, Icon Theme, Window Frame, and Desktop Shell Theme)
 			echo '[org.cinnamon.desktop.interface]' > "$CINNAMON_OVERRIDE"
 			echo "gtk-theme='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
 			echo "icon-theme='Numix'" >> "$CINNAMON_OVERRIDE"
@@ -130,24 +100,18 @@ Main() {
 			echo "" >> "$CINNAMON_OVERRIDE"
 			echo '[org.cinnamon.theme]' >> "$CINNAMON_OVERRIDE"
 			echo "name='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
-			echo "" >> "$CINNAMON_OVERRIDE"
-			# FIX: Inject keys to set the background image path and option parameters
-			echo '[org.cinnamon.desktop.background]' >> "$CINNAMON_OVERRIDE"
-			echo "picture-uri='file:///usr/share/backgrounds/eqvaldi/Wallpaper1.png'" >> "$CINNAMON_OVERRIDE"
-			echo "picture-options='scaled'" >> "$CINNAMON_OVERRIDE"
 
-			# 5. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
 			glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-			# 6. Force LightDM theme configurations using our reliable high-priority file override
+			# 5. Force LightDM theme configurations using our reliable high-priority file override
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
-			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
-			;;
+			;;	
 		bionic)
 			# your code here
 			;;
@@ -158,23 +122,11 @@ Main() {
 			apt update -y
 			apt install cinnamon cinnamon-control-center cinnamon-screensaver orchis-gtk-theme numix-icon-theme f3 cinnamon-session cinnamon-settings-daemon dconf-gsettings-backend desktop-base gnome-terminal pulseaudio pulseaudio-module-bluetooth pavucontrol muffin nemo xserver-xorg file-roller network-manager-gnome gnome-calculator ghostscript libmtp-runtime light-locker vlc hyfetch lightdm-gtk-greeter-settings eog xorg lightdm synaptic gdebi htop gnome-icon-theme nemo usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse gedit inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev gnome-screenshot gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom libglx-mesa0 libgl1-mesa-dri dosbox milkytracker cmake build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
 			apt clean
-			# 1. Download and deploy the custom wallpapers from the raw GitHub endpoints
-			WP_DIR="/usr/share/backgrounds/eqvaldi"
-			install -D /dev/null "$WP_DIR/placeholder"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper1.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper2.png"
-			wget https://githubusercontent.com -O "$WP_DIR/Wallpaper3.png"
-			rm -f "$WP_DIR/placeholder"
-
-			# 2. Ensure a readable copy exists for the LightDM greeter at the root backgrounds track
-			cp "$WP_DIR/Wallpaper1.png" /usr/share/backgrounds/lightdm-wallpaper.png
-			chmod 644 /usr/share/backgrounds/lightdm-wallpaper.png
-
-			# 3. Define the global GLib/GSettings schema override path for Cinnamon
+			# 1. Define the global GLib/GSettings schema override path for Cinnamon
 			CINNAMON_OVERRIDE="/usr/share/glib-2.0/schemas/99_cinnamon_custom_theme.gschema.override"
 			install -D /dev/null "$CINNAMON_OVERRIDE"
 
-			# 4. Inject Cinnamon interface parameters (GTK Theme, Icon Theme, Window Frame, Shell Theme, and Custom Wallpaper keys)
+			# 2. Inject Cinnamon interface parameters
 			echo '[org.cinnamon.desktop.interface]' > "$CINNAMON_OVERRIDE"
 			echo "gtk-theme='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
 			echo "icon-theme='Numix'" >> "$CINNAMON_OVERRIDE"
@@ -184,23 +136,17 @@ Main() {
 			echo "" >> "$CINNAMON_OVERRIDE"
 			echo '[org.cinnamon.theme]' >> "$CINNAMON_OVERRIDE"
 			echo "name='Orchis-Dark'" >> "$CINNAMON_OVERRIDE"
-			echo "" >> "$CINNAMON_OVERRIDE"
-			# FIX: Inject keys to set the background image path and option parameters
-			echo '[org.cinnamon.desktop.background]' >> "$CINNAMON_OVERRIDE"
-			echo "picture-uri='file:///usr/share/backgrounds/eqvaldi/Wallpaper1.png'" >> "$CINNAMON_OVERRIDE"
-			echo "picture-options='scaled'" >> "$CINNAMON_OVERRIDE"
 
-			# 5. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			# 3. Compile Cinnamon schemas system-wide
 			glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-			# 6. Force LightDM theme configurations using our reliable high-priority file override
+			# 4. Force LightDM theme configuration override
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
-			echo 'background = /usr/share/backgrounds/lightdm-wallpaper.png' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
 	esac
 } # Main
