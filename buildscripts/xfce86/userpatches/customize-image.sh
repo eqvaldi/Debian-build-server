@@ -41,16 +41,36 @@ Main() {
 			;;
 		bookworm)
 			apt update -y
-			apt install xfce4 xfce4-terminal file-roller numix-icon-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc neofetch lightdm-gtk-greeter-settings ristretto xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl software-properties-gtk system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec59 exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium -y
+			apt install xfce4 xfce4-terminal  file-roller numix-icon-theme orchis-gtk-theme f3 network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc neofetch lightdm-gtk-greeter-settings ristretto xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl software-properties-gtk system-config-printer transmission-gtk xfce4-notifyd xfce4-power-manager xfce4-whiskermenu-plugin xfce4-power-manager-plugins pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime thunar-archive-plugin mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec59 exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium -y
 			apt install build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build -y
 			apt install bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils spek bison flex glmark2* -y
 			apt autoremove -y
-		        apt purge snapd -y
-            		echo 'Package: snapd' > /etc/apt/preferences.d/nosnap.pref
-            		echo 'Pin: release a=*' >> /etc/apt/preferences.d/nosnap.pref
-            		echo 'Pin-Priority: -10' >> /etc/apt/preferences.d/nosnap.pref
-            		cat /etc/apt/preferences.d/nosnap.pref
-			apt clean
+		        # 1. Define global system paths directly
+			GLOBAL_XSET="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
+			GLOBAL_XFWM="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
+			GLOBAL_XFDESK="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
+
+			# 2. Write global layouts (FIXED: Injected MenuImages & ButtonImages toggles)
+			install -D /dev/null "$GLOBAL_XSET"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xsettings" version="1.0"><property name="Net" type="empty"><property name="ThemeName" type="string" value="Orchis-Dark"/><property name="IconThemeName" type="string" value="Numix"/></property><property name="Gtk" type="empty"><property name="MenuImages" type="bool" value="true"/><property name="ButtonImages" type="bool" value="true"/></property></channel>' > "$GLOBAL_XSET"
+
+			# 3. Write global window borders layout
+			install -D /dev/null "$GLOBAL_XFWM"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfwm4" version="1.0"><property name="general" type="empty"><property name="theme" type="string" value="Orchis-Dark"/></property></channel>' > "$GLOBAL_XFWM"
+
+			# 4. FIX: Inject the exact solid color tracking elements into the desktop configuration
+			install -D /dev/null "$GLOBAL_XFDESK"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-desktop" version="1.0"><property name="backdrop" type="empty"><property name="screen0" type="empty"><property name="monitor0" type="empty"><property name="image-show" type="bool" value="false"/><property name="color-style" type="int" value="0"/><property name="color1" type="empty"><property name="red" type="uint" value="1285"/><property name="green" type="uint" value="25700"/><property name="blue" type="uint" value="29555"/><property name="alpha" type="uint" value="65535"/></property></monitor0></screen0></backdrop></channel>' > "$GLOBAL_XFDESK"
+
+			# 5. Force LightDM to apply theme and matching backdrop color via high-priority override file
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
 		trixie)
 			apt update -y
@@ -59,6 +79,7 @@ Main() {
 			# 1. Define global system paths directly
 			GLOBAL_XSET="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 			GLOBAL_XFWM="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
+			GLOBAL_XFDESK="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
 
 			# 2. Write global layouts (FIXED: Injected MenuImages & ButtonImages toggles)
 			install -D /dev/null "$GLOBAL_XSET"
@@ -68,7 +89,11 @@ Main() {
 			install -D /dev/null "$GLOBAL_XFWM"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfwm4" version="1.0"><property name="general" type="empty"><property name="theme" type="string" value="Orchis-Dark"/></property></channel>' > "$GLOBAL_XFWM"
 
-			# 4. Force LightDM to apply theme via high-priority override file
+			# 4. FIX: Inject the exact solid color tracking elements into the desktop configuration
+			install -D /dev/null "$GLOBAL_XFDESK"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-desktop" version="1.0"><property name="backdrop" type="empty"><property name="screen0" type="empty"><property name="monitor0" type="empty"><property name="image-show" type="bool" value="false"/><property name="color-style" type="int" value="0"/><property name="color1" type="empty"><property name="red" type="uint" value="1285"/><property name="green" type="uint" value="25700"/><property name="blue" type="uint" value="29555"/><property name="alpha" type="uint" value="65535"/></property></monitor0></screen0></backdrop></channel>' > "$GLOBAL_XFDESK"
+
+			# 5. Force LightDM to apply theme and matching backdrop color via high-priority override file
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			
@@ -76,6 +101,7 @@ Main() {
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;			
 		sid)
 			apt update -y
@@ -84,6 +110,7 @@ Main() {
 			# 1. Define global system paths directly
 			GLOBAL_XSET="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 			GLOBAL_XFWM="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
+			GLOBAL_XFDESK="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
 
 			# 2. Write global layouts (FIXED: Injected MenuImages & ButtonImages toggles)
 			install -D /dev/null "$GLOBAL_XSET"
@@ -93,7 +120,11 @@ Main() {
 			install -D /dev/null "$GLOBAL_XFWM"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfwm4" version="1.0"><property name="general" type="empty"><property name="theme" type="string" value="Orchis-Dark"/></property></channel>' > "$GLOBAL_XFWM"
 
-			# 4. Force LightDM to apply theme via high-priority override file
+			# 4. FIX: Inject the exact solid color tracking elements into the desktop configuration
+			install -D /dev/null "$GLOBAL_XFDESK"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-desktop" version="1.0"><property name="backdrop" type="empty"><property name="screen0" type="empty"><property name="monitor0" type="empty"><property name="image-show" type="bool" value="false"/><property name="color-style" type="int" value="0"/><property name="color1" type="empty"><property name="red" type="uint" value="1285"/><property name="green" type="uint" value="25700"/><property name="blue" type="uint" value="29555"/><property name="alpha" type="uint" value="65535"/></property></monitor0></screen0></backdrop></channel>' > "$GLOBAL_XFDESK"
+
+			# 5. Force LightDM to apply theme and matching backdrop color via high-priority override file
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			
@@ -101,6 +132,7 @@ Main() {
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
   		bionic)
 			# your code here
@@ -115,8 +147,9 @@ Main() {
 			# 1. Define global system paths directly
 			GLOBAL_XSET="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
 			GLOBAL_XFWM="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml"
+			GLOBAL_XFDESK="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
 
-			# 2. Write global layouts (Injected MenuImages & ButtonImages toggles)
+			# 2. Write global layouts (FIXED: Injected MenuImages & ButtonImages toggles)
 			install -D /dev/null "$GLOBAL_XSET"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xsettings" version="1.0"><property name="Net" type="empty"><property name="ThemeName" type="string" value="Orchis-Dark"/><property name="IconThemeName" type="string" value="Numix"/></property><property name="Gtk" type="empty"><property name="MenuImages" type="bool" value="true"/><property name="ButtonImages" type="bool" value="true"/></property></channel>' > "$GLOBAL_XSET"
 
@@ -124,13 +157,19 @@ Main() {
 			install -D /dev/null "$GLOBAL_XFWM"
 			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfwm4" version="1.0"><property name="general" type="empty"><property name="theme" type="string" value="Orchis-Dark"/></property></channel>' > "$GLOBAL_XFWM"
 
-			# 4. Force LightDM to apply theme via high-priority override file
+			# 4. FIX: Inject the exact solid color tracking elements into the desktop configuration
+			install -D /dev/null "$GLOBAL_XFDESK"
+			echo '<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-desktop" version="1.0"><property name="backdrop" type="empty"><property name="screen0" type="empty"><property name="monitor0" type="empty"><property name="image-show" type="bool" value="false"/><property name="color-style" type="int" value="0"/><property name="color1" type="empty"><property name="red" type="uint" value="1285"/><property name="green" type="uint" value="25700"/><property name="blue" type="uint" value="29555"/><property name="alpha" type="uint" value="65535"/></property></monitor0></screen0></backdrop></channel>' > "$GLOBAL_XFDESK"
+
+			# 5. Force LightDM to apply theme and matching backdrop color via high-priority override file
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
 	esac
 } # Main

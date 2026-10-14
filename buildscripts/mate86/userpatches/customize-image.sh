@@ -41,16 +41,41 @@ Main() {
 			;;
 		bookworm)
 			apt update -y
-			apt install caja dconf-gsettings-backend fonts-cantarell f3 gvfs-backends marco mate-control-center mate-desktop mate-icon-theme mate-menus mate-notification-daemon mate-panel mate-polkit mate-session-manager mate-settings-daemon mate-terminal mate-themes file-roller numix-icon-theme network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc neofetch lightdm-gtk-greeter-settings eom xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse pluma inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl software-properties-gtk system-config-printer transmission-gtk xfce4-notifyd mate-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec59 exfalso flac libjpeg-dev xfce4-screenshooter libglx-mesa0 libgl1-mesa-dri gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium -y
+			apt install caja dconf-gsettings-backend orchis-gtk-theme fonts-cantarell f3 gvfs-backends marco mate-control-center mate-desktop mate-icon-theme mate-menus mate-notification-daemon mate-panel mate-polkit mate-session-manager mate-settings-daemon mate-terminal mate-themes file-roller numix-icon-theme network-manager-gnome galculator ghostscript libmtp-runtime light-locker vlc neofetch lightdm-gtk-greeter-settings eom xorg lightdm synaptic gdebi htop pulseaudio pulseaudio-module-bluetooth gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse pluma inputattach xserver-xorg-input-all xserver-xorg-video-all xserver-xorg-video-qxl software-properties-gtk system-config-printer transmission-gtk xfce4-notifyd mate-power-manager pavucontrol tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec59 exfalso flac libjpeg-dev xfce4-screenshooter libglx-mesa0 libgl1-mesa-dri gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium -y
 			apt install build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build -y
 			apt install bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils spek bison flex glmark2* -y
 			apt autoremove -y
-		        apt purge snapd -y
-            		echo 'Package: snapd' > /etc/apt/preferences.d/nosnap.pref
-            		echo 'Pin: release a=*' >> /etc/apt/preferences.d/nosnap.pref
-            		echo 'Pin-Priority: -10' >> /etc/apt/preferences.d/nosnap.pref
-            		cat /etc/apt/preferences.d/nosnap.pref
-			apt clean
+		        # 2. Define the global GLib/GSettings schema override path
+			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
+			install -D /dev/null "$MATE_OVERRIDE"
+
+			# 3. Inject core interface parameters (Theme, Icons, Window Border, Menu Icons, and Solid Color Background)
+			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
+			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
+			echo "menus-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "buttons-have-icons=true" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
+			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			# FIX: Force MATE background engine to ignore wallpaper images and use our solid teal color
+			echo '[org.mate.background]' >> "$MATE_OVERRIDE"
+			echo "picture-options='none'" >> "$MATE_OVERRIDE"
+			echo "primary-color='#056473'" >> "$MATE_OVERRIDE"
+			echo "color-shading-type='solid'" >> "$MATE_OVERRIDE"
+
+			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
+			glib-compile-schemas /usr/share/glib-2.0/schemas/
+
+			# 5. Force LightDM theme configurations and matching solid color using our reliable high-priority file override
+			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
+			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
+			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
+			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
+			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
 		trixie)
 			apt update -y
@@ -60,7 +85,7 @@ Main() {
 			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
 			install -D /dev/null "$MATE_OVERRIDE"
 
-			# 3. Inject core interface parameters (Theme, Icons, Window Border, and Menu Icons)
+			# 3. Inject core interface parameters (Theme, Icons, Window Border, Menu Icons, and Solid Color Background)
 			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
 			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
 			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
@@ -69,17 +94,24 @@ Main() {
 			echo "" >> "$MATE_OVERRIDE"
 			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
 			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			# FIX: Force MATE background engine to ignore wallpaper images and use our solid teal color
+			echo '[org.mate.background]' >> "$MATE_OVERRIDE"
+			echo "picture-options='none'" >> "$MATE_OVERRIDE"
+			echo "primary-color='#056473'" >> "$MATE_OVERRIDE"
+			echo "color-shading-type='solid'" >> "$MATE_OVERRIDE"
 
 			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
 			glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			# 5. Force LightDM theme configurations and matching solid color using our reliable high-priority file override
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
    		sid)
 			apt update -y
@@ -89,7 +121,7 @@ Main() {
 			MATE_OVERRIDE="/usr/share/glib-2.0/schemas/99_mate_custom_theme.gschema.override"
 			install -D /dev/null "$MATE_OVERRIDE"
 
-			# 3. Inject core interface parameters (Theme, Icons, Window Border, and Menu Icons)
+			# 3. Inject core interface parameters (Theme, Icons, Window Border, Menu Icons, and Solid Color Background)
 			echo '[org.mate.interface]' > "$MATE_OVERRIDE"
 			echo "gtk-theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
 			echo "icon-theme='Numix'" >> "$MATE_OVERRIDE"
@@ -98,17 +130,24 @@ Main() {
 			echo "" >> "$MATE_OVERRIDE"
 			echo '[org.mate.Marco.general]' >> "$MATE_OVERRIDE"
 			echo "theme='Orchis-Dark'" >> "$MATE_OVERRIDE"
+			echo "" >> "$MATE_OVERRIDE"
+			# FIX: Force MATE background engine to ignore wallpaper images and use our solid teal color
+			echo '[org.mate.background]' >> "$MATE_OVERRIDE"
+			echo "picture-options='none'" >> "$MATE_OVERRIDE"
+			echo "primary-color='#056473'" >> "$MATE_OVERRIDE"
+			echo "color-shading-type='solid'" >> "$MATE_OVERRIDE"
 
 			# 4. CRITICAL: Compile the newly added schema override inside the chroot rootfs
 			glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-			# 5. Force LightDM theme configurations using our reliable high-priority file override
+			# 5. Force LightDM theme configurations and matching solid color using our reliable high-priority file override
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
 		bionic)
 			# your code here

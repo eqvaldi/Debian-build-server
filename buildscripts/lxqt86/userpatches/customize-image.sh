@@ -69,7 +69,8 @@ Main() {
 			echo 'theme=Orchis-Dark' >> "$GLOBAL_LXQT_SESSION"
 			echo '[lxqt]' >> "$GLOBAL_LXQT_SESSION"
 			echo 'theme=frost' >> "$GLOBAL_LXQT_SESSION"
-			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_SESSION"
+			# FIX: Allow the file manager background color rules to control the desktop
+			echo 'override_wallpaper=false' >> "$GLOBAL_LXQT_SESSION"
 
 			# 2. FIX: Mirror the Frost layout parameters to the primary tracker file
 			GLOBAL_LXQT_MAIN="/etc/xdg/lxqt/lxqt.conf"
@@ -77,29 +78,31 @@ Main() {
 			echo '[General]' > "$GLOBAL_LXQT_MAIN"
 			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_MAIN"
 			echo 'theme=frost' >> "$GLOBAL_LXQT_MAIN"
-			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_MAIN"
+			# FIX: Allow the file manager background color rules to control the desktop
+			echo 'override_wallpaper=false' >> "$GLOBAL_LXQT_MAIN"
 
 			# 3. Target global OpenBox configuration and set window frame layout 
 			GLOBAL_OPENBOX="/etc/xdg/openbox/rc.xml"
 			install -D /dev/null "$GLOBAL_OPENBOX"
 			echo '<?xml version="1.0" encoding="UTF-8"?><openbox_config xmlns="http://openbox.org"><theme><name>Nightmare</name><font place="ActiveWindow"><name>sans</name><size>10</size><weight>bold</weight><slant>normal</slant></font></theme></openbox_config>' > "$GLOBAL_OPENBOX"
 
-			# 4. Handle default backup asset allocation for file manager (pcmanfm-qt)
+			# 4. FIX: Direct pcmanfm-qt to ignore wallpaper images and paint a solid dark teal canvas
 			GLOBAL_PCMANFM="/etc/xdg/pcmanfm-qt/default/settings.conf"
 			install -D /dev/null "$GLOBAL_PCMANFM"
 			echo '[Volume]' >> "$GLOBAL_PCMANFM"
 			echo 'show_wm_menu=true' >> "$GLOBAL_PCMANFM"
 			echo '[Desktop]' >> "$GLOBAL_PCMANFM"
-			echo 'Wallpaper=/usr/share/backgrounds/lxqt-dark.png' >> "$GLOBAL_PCMANFM"
-			echo 'WallpaperMode=stretch' >> "$GLOBAL_PCMANFM"
+			echo 'WallpaperMode=color' >> "$GLOBAL_PCMANFM"
+			echo 'BgColor=#056473' >> "$GLOBAL_PCMANFM"
 
-			# 5. Route LightDM overrides via highest alphabetical processing tag
+			# 5. Route LightDM overrides via highest alphabetical processing tag and apply matching background
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;
    		sid)
 			apt update -y
@@ -118,7 +121,8 @@ Main() {
 			echo 'theme=Orchis-Dark' >> "$GLOBAL_LXQT_SESSION"
 			echo '[lxqt]' >> "$GLOBAL_LXQT_SESSION"
 			echo 'theme=frost' >> "$GLOBAL_LXQT_SESSION"
-			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_SESSION"
+			# FIX: Allow the file manager background color rules to control the desktop
+			echo 'override_wallpaper=false' >> "$GLOBAL_LXQT_SESSION"
 
 			# 2. FIX: Mirror the Frost layout parameters to the primary tracker file
 			GLOBAL_LXQT_MAIN="/etc/xdg/lxqt/lxqt.conf"
@@ -126,29 +130,31 @@ Main() {
 			echo '[General]' > "$GLOBAL_LXQT_MAIN"
 			echo 'icon_theme=Numix' >> "$GLOBAL_LXQT_MAIN"
 			echo 'theme=frost' >> "$GLOBAL_LXQT_MAIN"
-			echo 'override_wallpaper=true' >> "$GLOBAL_LXQT_MAIN"
+			# FIX: Allow the file manager background color rules to control the desktop
+			echo 'override_wallpaper=false' >> "$GLOBAL_LXQT_MAIN"
 
 			# 3. Target global OpenBox configuration and set window frame layout 
 			GLOBAL_OPENBOX="/etc/xdg/openbox/rc.xml"
 			install -D /dev/null "$GLOBAL_OPENBOX"
 			echo '<?xml version="1.0" encoding="UTF-8"?><openbox_config xmlns="http://openbox.org"><theme><name>Nightmare</name><font place="ActiveWindow"><name>sans</name><size>10</size><weight>bold</weight><slant>normal</slant></font></theme></openbox_config>' > "$GLOBAL_OPENBOX"
 
-			# 4. Handle default backup asset allocation for file manager (pcmanfm-qt)
+			# 4. FIX: Direct pcmanfm-qt to ignore wallpaper images and paint a solid dark teal canvas
 			GLOBAL_PCMANFM="/etc/xdg/pcmanfm-qt/default/settings.conf"
 			install -D /dev/null "$GLOBAL_PCMANFM"
 			echo '[Volume]' >> "$GLOBAL_PCMANFM"
 			echo 'show_wm_menu=true' >> "$GLOBAL_PCMANFM"
 			echo '[Desktop]' >> "$GLOBAL_PCMANFM"
-			echo 'Wallpaper=/usr/share/backgrounds/lxqt-dark.png' >> "$GLOBAL_PCMANFM"
-			echo 'WallpaperMode=stretch' >> "$GLOBAL_PCMANFM"
+			echo 'WallpaperMode=color' >> "$GLOBAL_PCMANFM"
+			echo 'BgColor=#056473' >> "$GLOBAL_PCMANFM"
 
-			# 5. Route LightDM overrides via highest alphabetical processing tag
+			# 5. Route LightDM overrides via highest alphabetical processing tag and apply matching background
 			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
 			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
 			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
 			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
 			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
 			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
+			echo 'background = #056473' >> "$LIGHTDM_OVERRIDE_FILE"
 			;;	
 		bionic)
 			# your code here

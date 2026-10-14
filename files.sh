@@ -87,7 +87,7 @@ do
 	mkdir ARM
 	cd ..
 	cd ..
-	git clone -b v4.5.1 https://github.com/Eqvaldi-deer/build.git
+	git clone -b v4.5.1 https://github.com/eqvaldi/build.git
             ;;
         2)
 	#update
