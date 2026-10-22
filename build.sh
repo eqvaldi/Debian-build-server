@@ -47,7 +47,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/xfce/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -55,7 +54,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/lxqt/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -63,7 +61,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/mate/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -71,7 +68,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/server/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -79,7 +75,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/cinnamon/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -87,7 +82,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/labwc/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -106,7 +100,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/xfce/EDGE/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -114,7 +107,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/lxqt/EDGE/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -122,7 +114,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes	
 	cd ..
 	mv ./build/output/images ./img/mate/EDGE/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -130,7 +121,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/server/EDGE/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -138,7 +128,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/cinnamon/EDGE/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -146,7 +135,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/labwc/EDGE/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -164,7 +152,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes;
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/xfce/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -172,7 +159,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.lxqt" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/lxqt/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -180,7 +166,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.mate" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/mate/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -188,7 +173,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.xfce-lite" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/server/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -196,7 +180,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/cinnamon/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -204,7 +187,6 @@ do
 	cd ./build
 	./compile.sh  BOARD=uefi-x86 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=uefi-arm64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=uefi-riscv64 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.labwc" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/labwc/X86/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -226,7 +208,6 @@ do
 	./compile.sh  BOARD=orangepiplus ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=orangepiwin ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=orangepizeroplus2-h5 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=jetson-nano ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/minimal/ARM/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -306,7 +287,6 @@ do
 	cp ./buildscripts/cinnamon/userpatches/customize-image.sh ./build/userpatches/
 	cd ./build
 	./compile.sh  BOARD=odroidn2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=odroidxu4 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=orangepi3 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=odroidc2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
@@ -349,7 +329,6 @@ do
 	./compile.sh  BOARD=orangepiplus ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=orangepiwin ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=orangepizeroplus2-h5 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=jetson-nano ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux" VENDORCOLOR="5;100;115" BRANCH=current RELEASE=trixie BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
 	mv ./build/output/images ./img/minimal/ARM/
 	rm -rf ./build/userpatches/customize-image.sh
@@ -429,7 +408,6 @@ do
 	cp ./buildscripts/cinnamon/userpatches/customize-image.sh ./build/userpatches/
 	cd ./build
 	./compile.sh  BOARD=odroidn2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
-	./compile.sh  BOARD=odroidxu4 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=orangepi3 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	./compile.sh  BOARD=odroidc2 ALLOW_ROOT=yes KERNEL_GIT=full VENDOR="EQLinux.cinnamon" VENDORCOLOR="5;100;115" BRANCH=edge RELEASE=sid BUILD_MINIMAL=yes BUILD_DESKTOP=no BUILD_ONLY=default REPOSITORY_INSTALL=u-boot,kernel,armbian-config,armbian-firmware USE_CCACHE=no INSTALL_HEADERS=yes KERNEL_CONFIGURE=no SKIP_BOOTSPLASH=yes USE_TORRENT=yes COMPRESS_OUTPUTIMAGE=xz,sha BSPFREEZE=yes
 	cd ..
