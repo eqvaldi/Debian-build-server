@@ -33,59 +33,14 @@ Main() {
 
 			;;
 		trixie)
-
+			apt update -y
+			apt install enlightenment terminology network-manager xdg-desktop-portal-gtk connman pulseaudio numix-icon-theme pasystray light-locker lightdm-gtk-greeter-settings lightdm file-roller f3 galculator ghostscript libmtp-runtime vlc hyfetch ephoto xorg synaptic htop usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-input-synaptics xserver-xorg-video-all xorg software-properties-gtk system-config-printer transmission-gtk tumbler mesa-utils gparted unrar-free p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
+			apt clean
 			;;			
 		sid)
 			apt update -y
 			apt install enlightenment terminology network-manager xdg-desktop-portal-gtk connman pulseaudio numix-icon-theme pasystray light-locker lightdm-gtk-greeter-settings lightdm file-roller f3 galculator ghostscript libmtp-runtime vlc hyfetch ephoto xorg synaptic htop usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-input-synaptics xserver-xorg-video-all xorg software-properties-gtk system-config-printer transmission-gtk tumbler mesa-utils gparted unrar-free p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter build-essential libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec-dev exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish thunar-archive-plugin gufw handbrake audacious audacity putty libglx-mesa0 libgl1-mesa-dri gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker cmake chromium build-essential dialog git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev bash-completion alsa-utils apt-utils sudo libcurl4-openssl-dev firmware-sof-signed alsa-firmware-loaders libsdl2-net-dev cifs-utils vainfo vdpauinfo firmware-nvidia-gsp pciutils pciutils sox bison flex libsndfile1-dev quakespasm glmark2* -y
-			apt clean
-			# 1. Define the global Labwc initialization environment variables
-			GLOBAL_LAB_ENV="/etc/xdg/labwc/environment"
-			install -D /dev/null "$GLOBAL_LAB_ENV"
-			echo "GTK_THEME=Orchis-Dark" > "$GLOBAL_LAB_ENV"
-			echo "ICON_THEME=Numix" >> "$GLOBAL_LAB_ENV"
-			echo "XDG_CURRENT_DESKTOP=labwc" >> "$GLOBAL_LAB_ENV"
-
-			# 2. Target and build the system-wide Autostart script configuration loop
-			GLOBAL_LAB_START="/etc/xdg/labwc/autostart"
-			install -D /dev/null "$GLOBAL_LAB_START"
-			echo "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=labwc" > "$GLOBAL_LAB_START"
-			echo "gsettings set org.gnome.desktop.interface gtk-theme 'Orchis-Dark' &" >> "$GLOBAL_LAB_START"
-			echo "gsettings set org.gnome.desktop.interface icon-theme 'Numix' &" >> "$GLOBAL_LAB_START"
-			echo "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' &" >> "$GLOBAL_LAB_START"
-			echo "/usr/libexec/lxqt-policykit-agent &" >> "$GLOBAL_LAB_START"
-			echo "waybar &" >> "$GLOBAL_LAB_START"
-
-			# 3. Hardcode global GTK fallback overrides for modern application styling
-			GLOBAL_GTK2="/etc/gtk-2.0/gtkrc"
-			install -D /dev/null "$GLOBAL_GTK2"
-			echo 'gtk-theme-name="Orchis-Dark"' > "$GLOBAL_GTK2"
-			echo 'gtk-icon-theme-name="Numix"' >> "$GLOBAL_GTK2"
-
-			GLOBAL_GTK3="/etc/gtk-3.0/settings.ini"
-			install -D /dev/null "$GLOBAL_GTK3"
-			echo '[Settings]' > "$GLOBAL_GTK3"
-			echo 'gtk-theme-name=Orchis-Dark' >> "$GLOBAL_GTK3"
-			echo 'gtk-icon-theme-name=Numix' >> "$GLOBAL_GTK3"
-			echo 'gtk-application-prefer-dark-theme=1' >> "$GLOBAL_GTK3"
-
-			# 4. Rewrite the LightDM Wayland session script with full DBus activation hooks
-			GLOBAL_LAB_SESSION="/usr/share/wayland-sessions/labwc.desktop"
-			install -D /dev/null "$GLOBAL_LAB_SESSION"
-			echo "[Desktop Entry]" > "$GLOBAL_LAB_SESSION"
-			echo "Name=Labwc" >> "$GLOBAL_LAB_SESSION"
-			echo "Comment=Lightweight Wayland Window Compositor" >> "$GLOBAL_LAB_SESSION"
-			echo "Exec=dbus-launch --exit-with-session systemd-cat labwc" >> "$GLOBAL_LAB_SESSION"
-			echo "Type=Application" >> "$GLOBAL_LAB_SESSION"
-
-			# 5. Force LightDM theme configurations using our reliable high-priority file override
-			LIGHTDM_OVERRIDE_DIR="/etc/lightdm/lightdm-gtk-greeter.conf.d"
-			LIGHTDM_OVERRIDE_FILE="$LIGHTDM_OVERRIDE_DIR/99_custom_theme.conf"
-			install -D /dev/null "$LIGHTDM_OVERRIDE_FILE"
-			echo '[greeter]' > "$LIGHTDM_OVERRIDE_FILE"
-			echo 'theme-name = Orchis-Dark' >> "$LIGHTDM_OVERRIDE_FILE"
-			echo 'icon-theme-name = Numix' >> "$LIGHTDM_OVERRIDE_FILE"
-			;;	
+			apt clean	
 		bionic)
 			# your code here
 			;;
